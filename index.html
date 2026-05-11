@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>電子書目錄</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f3eee8;
+      font-family: "Noto Sans TC", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .top-bar {
+      text-align: center;
+      padding: 16px 12px;
+      background: #ffffff;
+      color: #333;
+      font-size: 18px;
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .book-wrapper {
+      width: 100%;
+      min-height: calc(100vh - 70px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 10px 90px;
+    }
+
+    #book {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .page {
+      background: #fff;
+      overflow: hidden;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.08);
+    }
+
+    .page img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #fff;
+    }
+
+    .controls {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .controls button {
+      border: none;
+      background: #3b2f2f;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .controls button:hover {
+      background: #5b4742;
+    }
+
+    .float-buttons {
+      position: fixed;
+      right: 16px;
+      bottom: 90px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 120;
+    }
+
+    .float-buttons a {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #3b2f2f;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      font-size: 22px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.28);
+    }
+
+    .float-buttons a:hover {
+      background: #765c52;
+    }
+
+    @media (max-width: 768px) {
+      .top-bar {
+        font-size: 16px;
+      }
+
+      .book-wrapper {
+        padding-top: 15px;
+      }
+
+      .controls button {
+        padding: 9px 14px;
+        font-size: 14px;
+      }
+
+      .float-buttons {
+        right: 12px;
+        bottom: 82px;
+      }
+
+      .float-buttons a {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar">
+    電子書目錄｜左右滑動或點擊按鈕翻頁
+  </div>
+
+  <div class="book-wrapper">
+    <div id="book">
+      <div class="page"><img src="https://i.ibb.co/N6N2RCPY/01.png" alt="01"></div>
+      <div class="page"><img src="https://i.ibb.co/0pYNC9GN/02.png" alt="02"></div>
+      <div class="page"><img src="https://i.ibb.co/b5zv13yT/03.png" alt="03"></div>
+      <div class="page"><img src="https://i.ibb.co/7xf82xj1/04.png" alt="04"></div>
+      <div class="page"><img src="https://i.ibb.co/CpCqKZVn/05.png" alt="05"></div>
+      <div class="page"><img src="https://i.ibb.co/N2sfyTFK/06.png" alt="06"></div>
+      <div class="page"><img src="https://i.ibb.co/gLSzBWZf/07.png" alt="07"></div>
+      <div class="page"><img src="https://i.ibb.co/CKzMYkbn/08.png" alt="08"></div>
+      <div class="page"><img src="https://i.ibb.co/TqxBGptg/09.png" alt="09"></div>
+      <div class="page"><img src="https://i.ibb.co/LzV8HgZf/10.png" alt="10"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="pageFlip.flipPrev()">上一頁</button>
+    <button onclick="pageFlip.flipNext()">下一頁</button>
+  </div>
+
+  <div class="float-buttons">
+    <a href="tel:033246772" title="一鍵撥打電話">☎</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=桃園市大園區中正東路341號" target="_blank" title="一鍵導航">📍</a>
+    <a href="mailto:lekro.tp.033246772@gmail.com" title="一鍵寄信">✉</a>
+  </div>
+
+  <script>
+    const pageFlip = new St.PageFlip(document.getElementById("book"), {
+      width: 450,
+      height: 640,
+      size: "stretch",
+      minWidth: 315,
+      maxWidth: 900,
+      minHeight: 450,
+      maxHeight: 1280,
+      maxShadowOpacity: 0.35,
+      showCover: true,
+      mobileScrollSupport: false,
+      usePortrait: true,
+      flippingTime: 800
+    });
+
+    pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+  </script>
+
+</body>
+</html>
